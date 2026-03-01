@@ -7,7 +7,7 @@ const credentials = [
   {
     icon: "🎓",
     title: "Высшее образование",
-    desc: "Диплом психолога, специализация в семейной и детской психологии",
+    desc: "Диплом психолога, специализация в семейной, детской и педагогической психологии",
   },
   {
     icon: "📜",
@@ -16,8 +16,8 @@ const credentials = [
   },
   {
     icon: "🤝",
-    title: "Медиатор",
-    desc: "Сертифицированный специалист по разрешению семейных и деловых конфликтов",
+    title: "Дипломированный медиатор",
+    desc: "Специалист по решению семейных, школьных, деловых конфликтов",
   },
   {
     icon: "📚",
@@ -78,7 +78,7 @@ export function About() {
             }`}
           >
             <div className="relative">
-              <div className="relative h-[480px] rounded-[28px] overflow-hidden shadow-xl">
+              <div className="relative h-[700px] rounded-[28px] overflow-hidden shadow-xl">
                 <Image
                   src="/images/office.jpg"
                   alt="Кабинет психолога Натальи Ульяновой"

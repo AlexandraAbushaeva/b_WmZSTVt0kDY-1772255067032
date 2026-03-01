@@ -156,7 +156,7 @@ export function Problems() {
               Готовы сделать первый шаг?
             </p>
             <p className="text-sm text-[var(--primary-foreground)]/60 mt-1">
-              Первичная консультация — без обязательств и осуждения
+              Напишите мне, и мы вместе определим, как начать работу.
             </p>
           </div>
           <button

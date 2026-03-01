@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react"
 import { Phone, MessageCircle, Clock, MapPin, Send } from "lucide-react"
+import { Toaster, toast } from 'sonner'
+
 
 const contactInfo = [
   {
@@ -14,21 +16,21 @@ const contactInfo = [
   {
     icon: MessageCircle,
     label: "Telegram",
-    value: "@natalia_psych",
+    value: "@Natalia_Ul23",
     sub: "Пишите в любое время",
     href: "https://t.me/Natalia_Ul23",
   },
   {
     icon: Clock,
     label: "Режим работы",
-    value: "Пн–Пт: 10:00–20:00",
-    sub: "Сб: 10:00–16:00",
+    value: "Пн–ВС: 08:00–21:00",
+    sub: "",
   },
   {
     icon: MapPin,
     label: "Формат",
     value: "Онлайн и очно",
-    sub: "г. Вологда, по договорённости",
+    sub: "",
   },
 ]
 
@@ -64,26 +66,48 @@ const encode = (data: Record<string, any>) => {
     .join("&");
 };
 
-// Указываем тип React.FormEvent для события формы
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   setLoading(true);
 
+  const token = process.env.NEXT_PUBLIC_TG_TOKEN;
+  const chatId = process.env.NEXT_PUBLIC_TG_CHAT_ID;
+
+  const message = `
+🚀 **Новая заявка!**
+👤 **Имя:** ${form.name}
+📞 **Связь:** ${form.phone}
+🎯 **Тема:** ${form.request}
+📍 **Формат:** ${form.format}
+📝 **Сообщение:** ${form.message || 'Нет сообщения'}
+  `.trim();
+
   try {
-    await fetch("/", {
+    const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ 
-        "form-name": "callback-form", 
-        ...form 
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: message,
+        parse_mode: "Markdown",
       }),
     });
-    
-    alert("Спасибо! Заявка принята.");
-    // Очистка формы (проверьте, что начальные значения совпадают с вашими)
-    setForm({ name: '', phone: '', request: '', format: 'any', message: '' });
+
+    if (response.ok) {
+      // КРАСИВОЕ УВЕДОМЛЕНИЕ ВМЕСТО ALERT
+      toast.success('Спасибо! Ваша заявка принята.', {
+        description: 'Я свяжусь с вами в течение нескольких часов в рабочее время для уточнения деталей.',
+        duration: 5000, // будет висеть 5 секунд
+      });
+      
+      setForm({ name: '', phone: '', request: '', format: 'any', message: '' });
+    } else {
+      throw new Error("Ошибка API");
+    }
   } catch (error) {
-    alert("Ошибка при отправке");
+    toast.error('Произошла ошибка при отправке', {
+      description: 'Пожалуйста, попробуйте еще раз или напишите мне напрямую в Telegram.'
+    });
     console.error(error);
   } finally {
     setLoading(false);
@@ -181,8 +205,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                 {[
                   "Отвечу в течение нескольких часов",
                   "Полная конфиденциальность",
-                  "Без осуждения и давления",
-                  "Первая консультация - без обязательств",
+                  "Без осуждения и давления"
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-[var(--primary-foreground)]/80">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--sage-light)] flex-shrink-0" />
@@ -217,15 +240,9 @@ const handleSubmit = async (e: React.FormEvent) => {
               </div>
             ) : (
               <form
-  name="callback-form"
-  method="POST"
-  data-netlify="true"
   onSubmit={handleSubmit}
   className="flex flex-col gap-5 p-6 lg:p-8 rounded-3xl bg-[var(--cream)] border border-[var(--border)]"
 >
-  {/* Это скрытое поле критически важно для React-проектов на Netlify */}
-  <input type="hidden" name="form-name" value="callback-form" />
-
   {/* Name + Phone */}
   <div className="grid sm:grid-cols-2 gap-4">
     <div className="flex flex-col gap-2">
@@ -234,7 +251,6 @@ const handleSubmit = async (e: React.FormEvent) => {
       </label>
       <input
         type="text"
-        name="name" // Добавлено имя для Netlify
         required
         value={form.name}
         onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -248,7 +264,6 @@ const handleSubmit = async (e: React.FormEvent) => {
       </label>
       <input
         type="text"
-        name="phone" // Добавлено имя для Netlify
         value={form.phone}
         onChange={(e) => setForm({ ...form, phone: e.target.value })}
         placeholder="+7 или @username"
@@ -260,7 +275,7 @@ const handleSubmit = async (e: React.FormEvent) => {
   {/* Request topic */}
   <div className="flex flex-col gap-2">
     <label className="text-xs font-semibold text-foreground uppercase tracking-wide">
-      С чем хотите разобраться?
+      Что вас волнует?
     </label>
     <div className="flex flex-wrap gap-2">
       {requestOptions.map((opt) => (
@@ -278,8 +293,6 @@ const handleSubmit = async (e: React.FormEvent) => {
         </button>
       ))}
     </div>
-    {/* Скрытое поле для передачи выбранного значения кнопки */}
-    <input type="hidden" name="request" value={form.request} />
   </div>
 
   {/* Format */}
@@ -307,8 +320,6 @@ const handleSubmit = async (e: React.FormEvent) => {
         </button>
       ))}
     </div>
-    {/* Скрытое поле для передачи выбранного формата */}
-    <input type="hidden" name="format" value={form.format} />
   </div>
 
   {/* Message */}
@@ -317,7 +328,6 @@ const handleSubmit = async (e: React.FormEvent) => {
       Коротко о ситуации (необязательно)
     </label>
     <textarea
-      name="message" // Добавлено имя для Netlify
       value={form.message}
       onChange={(e) => setForm({ ...form, message: e.target.value })}
       rows={3}
@@ -351,6 +361,7 @@ const handleSubmit = async (e: React.FormEvent) => {
   </p>
 </form>
             )}
+            <Toaster position="top-center" richColors />
           </div>
         </div>
       </div>

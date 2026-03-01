@@ -110,7 +110,7 @@ export function Hero() {
                   className="font-serif text-3xl font-semibold text-[var(--sage-dark)]"
                   style={{ fontFamily: "var(--font-serif)" }}
                 >
-                  10+
+                  30
                 </div>
                 <div className="text-xs text-muted-foreground mt-0.5">лет опыта</div>
               </div>
@@ -120,7 +120,7 @@ export function Hero() {
                   className="font-serif text-3xl font-semibold text-[var(--sage-dark)]"
                   style={{ fontFamily: "var(--font-serif)" }}
                 >
-                  500+
+                  1000+
                 </div>
                 <div className="text-xs text-muted-foreground mt-0.5">клиентов</div>
               </div>
@@ -130,9 +130,9 @@ export function Hero() {
                   className="font-serif text-3xl font-semibold text-[var(--sage-dark)]"
                   style={{ fontFamily: "var(--font-serif)" }}
                 >
-                  3
+                  6
                 </div>
-                <div className="text-xs text-muted-foreground mt-0.5">формата работы</div>
+                <div className="text-xs text-muted-foreground mt-0.5">форматов работы</div>
               </div>
             </div>
           </div>
