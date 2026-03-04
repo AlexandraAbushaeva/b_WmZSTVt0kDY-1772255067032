@@ -47,12 +47,21 @@ export function Footer() {
               +7 960 296 3555
             </a>
             <a
-              href="https://t.me/Natalia_Ul23"
+              href="https://t.me/pcuxolg"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[var(--background)] transition-colors duration-200"
             >
-              Telegram
+              Канал в Telegram
+            </a>
+
+            <a
+              href="https://vk.com/familypsychologist35"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[var(--background)] transition-colors duration-200"
+            >
+              Сообщество в VK
             </a>
           </div>
         </div>

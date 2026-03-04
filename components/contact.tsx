@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Phone, MessageCircle, Clock, MapPin, Send } from "lucide-react"
 import { Toaster, toast } from 'sonner'
+import Link from 'next/link';
 
 
 const contactInfo = [
@@ -356,9 +357,17 @@ const handleSubmit = async (e: React.FormEvent) => {
   </button>
 
   <p className="text-[10px] text-muted-foreground text-center leading-relaxed">
-    Нажимая кнопку, вы соглашаетесь на обработку персональных данных.
-    Вся информация строго конфиденциальна.
-  </p>
+  Нажимая кнопку, вы соглашаетесь на{' '}
+  <Link 
+    href="/politika" 
+    target="_blank"
+    className="underline hover:text-foreground transition-colors"
+  >
+    обработку персональных данных
+  </Link>.
+  <br />
+  Вся информация строго конфиденциальна.
+</p>
 </form>
             )}
             <Toaster position="top-center" richColors />
