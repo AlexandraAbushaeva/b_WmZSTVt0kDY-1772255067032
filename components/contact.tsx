@@ -101,6 +101,10 @@ const handleSubmit = async (e: React.FormEvent) => {
         duration: 5000, // будет висеть 5 секунд
       });
       
+      if (typeof window !== "undefined" && (window as any).ym) {
+    (window as any).ym(107132777, 'reachGoal', 'lead_form_submit');
+  }
+
       setForm({ name: '', phone: '', request: '', format: 'any', message: '' });
     } else {
       throw new Error("Ошибка API");
