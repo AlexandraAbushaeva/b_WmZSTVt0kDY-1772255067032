@@ -22,6 +22,12 @@ const contactInfo = [
     href: "https://t.me/Natalia_Ul23",
   },
   {
+    icon: MessageCircle,
+    label: "VK",
+    value: "@natali.harmony",
+    href: "https://vk.me/natali.harmony",
+  },
+  {
     icon: Clock,
     label: "Режим работы",
     value: "Пн–ВС: 08:00–21:00",
@@ -200,12 +206,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 
             {/* Promise block */}
             <div className="p-6 rounded-2xl bg-[var(--sage-dark)] text-[var(--primary-foreground)]">
-              <h3
-                className="font-serif text-xl font-semibold mb-3"
-                style={{ fontFamily: "var(--font-serif)" }}
-              >
-                Мои обязательства
-              </h3>
+
               <ul className="flex flex-col gap-2">
                 {[
                   "Отвечу в течение нескольких часов",

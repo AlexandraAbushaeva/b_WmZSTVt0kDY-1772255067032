@@ -93,13 +93,13 @@ export function Hero() {
                 <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
               </button>
               <a
-                href="https://t.me/Natalia_Ul23"
+                href="https://vk.me/natali.harmony"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 border border-[var(--border)] text-foreground px-8 py-4 rounded-full text-base font-medium hover:border-[var(--sage)] hover:text-[var(--sage)] transition-all duration-300 bg-white/60"
               >
                 <MessageCircle className="w-5 h-5" />
-                Написать в Telegram
+                Написать в VK
               </a>
             </div>
 
