@@ -59,7 +59,7 @@ export function Hero() {
           >
             <div className="inline-flex items-center gap-2 bg-[var(--sage-light)] text-[var(--sage-dark)] text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full w-fit">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--sage)] inline-block" />
-              Профессиональная психологическая помощь
+              Психологические онлайн-консультации
             </div>
 
             <h1
@@ -89,7 +89,7 @@ export function Hero() {
                 onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
                 className="group flex items-center justify-center gap-2 bg-[var(--sage)] text-[var(--primary-foreground)] px-8 py-4 rounded-full text-base font-medium hover:bg-[var(--sage-dark)] transition-all duration-300 shadow-md hover:shadow-lg"
               >
-                Записаться на консультацию
+                Записаться на онлайн-консультацию
                 <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
               </button>
               <a
@@ -167,7 +167,7 @@ export function Hero() {
                   <span className="text-[var(--sage)] font-serif font-bold text-lg" style={{ fontFamily: "var(--font-serif)" }}>★</span>
                 </div>
                 <div>
-                  <div className="text-xs font-semibold text-foreground">Онлайн и очно</div>
+                  <div className="text-xs font-semibold text-foreground">Онлайн-консультации</div>
                   <div className="text-xs text-muted-foreground">Запись доступна</div>
                 </div>
               </div>

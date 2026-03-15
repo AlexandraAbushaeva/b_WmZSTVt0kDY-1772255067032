@@ -36,7 +36,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: "Формат",
-    value: "Онлайн и очно",
+    value: "Онлайн",
     sub: "",
   },
 ]
@@ -49,7 +49,6 @@ export function Contact() {
     name: "",
     phone: "",
     request: "",
-    format: "online",
     message: "",
   })
   const [submitted, setSubmitted] = useState(false)
@@ -82,11 +81,10 @@ const handleSubmit = async (e: React.FormEvent) => {
 
   const message = `
 🚀 **Новая заявка!**
-👤 **Имя:** ${form.name}
-📞 **Связь:** ${form.phone}
-🎯 **Тема:** ${form.request}
-📍 **Формат:** ${form.format}
-📝 **Сообщение:** ${form.message || 'Нет сообщения'}
+ **Имя:** ${form.name}
+ **Связь:** ${form.phone}
+ **Тема:** ${form.request}
+ **Сообщение:** ${form.message || 'Нет сообщения'}
   `.trim();
 
   try {
@@ -111,7 +109,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     (window as any).ym(107132777, 'reachGoal', 'lead_form_submit');
   }
 
-      setForm({ name: '', phone: '', request: '', format: 'any', message: '' });
+      setForm({ name: '', phone: '', request: '', message: '' });
     } else {
       throw new Error("Ошибка API");
     }
@@ -156,7 +154,7 @@ const handleSubmit = async (e: React.FormEvent) => {
           >
             Запись на
             <br />
-            <span className="font-semibold italic text-[var(--sage)]">консультацию</span>
+            <span className="font-semibold italic text-[var(--sage)]">онлайн-консультацию</span>
           </h2>
           <p className="text-base text-muted-foreground mt-4 max-w-lg mx-auto leading-relaxed">
             Оставьте заявку — я отвечу в течение нескольких часов и предложу удобное время.
@@ -204,22 +202,6 @@ const handleSubmit = async (e: React.FormEvent) => {
               })}
             </div>
 
-            {/* Promise block */}
-            <div className="p-6 rounded-2xl bg-[var(--sage-dark)] text-[var(--primary-foreground)]">
-
-              <ul className="flex flex-col gap-2">
-                {[
-                  "Отвечу в течение нескольких часов",
-                  "Полная конфиденциальность",
-                  "Без осуждения и давления"
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-[var(--primary-foreground)]/80">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--sage-light)] flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
 
           {/* Right: Form */}
@@ -301,32 +283,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     </div>
   </div>
 
-  {/* Format */}
-  <div className="flex flex-col gap-2">
-    <label className="text-xs font-semibold text-foreground uppercase tracking-wide">
-      Предпочтительный формат
-    </label>
-    <div className="flex gap-3">
-      {[
-        { id: "online", label: "Онлайн" },
-        { id: "offline", label: "Очно" },
-        { id: "any", label: "Не важно" },
-      ].map((f) => (
-        <button
-          key={f.id}
-          type="button"
-          onClick={() => setForm({ ...form, format: f.id })}
-          className={`flex-1 text-sm py-2.5 rounded-xl border transition-all duration-200 ${
-            form.format === f.id
-              ? "bg-[var(--sage)] text-white border-[var(--sage)]"
-              : "bg-white border-[var(--border)] text-foreground hover:border-[var(--sage)]/50"
-          }`}
-        >
-          {f.label}
-        </button>
-      ))}
-    </div>
-  </div>
+
 
   {/* Message */}
   <div className="flex flex-col gap-2">
